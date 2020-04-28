@@ -1,26 +1,33 @@
 {
   "name": "kyr",
   "version": "1.0.0",
+  "engines": {
+    "node": "10.13.0"
+  },
   "scripts": {
     "start": "node src/server.js"
   },
   "dependencies": {
-    "@hapi/joi": "17.0.2",
-    "axios": "0.19.1",
-    "bcrypt": "3.0.7",
-    "body-parser": "1.19.0",
-    "cors": "2.8.5",
-    "cryptr": "6.0.1",
-    "dotenv": "8.2.0",
-    "express": "4.17.1",
-    "helmet": "3.21.2",
+    "@hapi/joi": "15.1.0",
+    "bcrypt": "3.0.6",
+    "body-parser": "latest",
+    "cors": "^2.8.5",
+    "cryptr": "4.0.2",
+    "csv-parser": "^2.3.2",
+    "dotenv": "8.0.0",
+    "express": "4.17.0",
+    "express-rate-limit": "4.0.1",
+    "helmet": "latest",
     "jwt-simple": "0.5.6",
-    "lodash": "4.17.15",
+    "lodash": "latest",
     "lodash-express": "0.1.0",
     "moment": "2.24.0",
+    "mongodb": "3.5.2",
     "mongoose": "^5.9.10",
-    "morgan": "1.9.1",
-    "uuid": "3.4.0",
+    "morgan": "latest",
+    "multer": "^1.4.2",
+    "readline-sync": "^1.4.10",
+    "uuid": "3.3.2",
     "winston": "3.2.1"
   }
 }

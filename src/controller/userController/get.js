@@ -1,5 +1,7 @@
+const User = require('../../db/models/user');
+
 async function getUser(id) {
-  let userModel = User.find({ _id: id });
+  let userModel = await User.findOne({ _id: id });
   if (!userModel) {
     return {
       data: { message: 'Not found user' }
@@ -11,3 +13,5 @@ async function getUser(id) {
     }
   };
 }
+
+module.exports = { getUser };

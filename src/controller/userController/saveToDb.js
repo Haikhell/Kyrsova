@@ -1,7 +1,7 @@
-const user = require('../../db/models/user');
+const User = require('../../db/models/user');
 
 module.exports = async function saveToDB(obj) {
-  const userToAdd = new Item({
+  const userToAdd = new User({
     firstName: obj.firstName,
     lastName: obj.lastName,
     login: obj.login,

@@ -1,13 +1,12 @@
 const http = require('http');
 
-const dbHelper = require('./db');
 const CONSTANTS = require('./const');
 const config = require('./config');
+const connect = require('./db');
 
 (async () => {
-  await dbHelper.func();
-
   const app = require('./app');
+  connect.func();
 
   const httpServer = http.createServer(app);
 

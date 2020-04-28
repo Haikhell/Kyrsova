@@ -1,18 +1,21 @@
 const security = require('../../helpers/security');
 const saveToDb = require('./saveToDb');
+const User = require('../../db/models/user');
 
-module.exports = async function registUser(login, password, firstName, lastName) {
-  let userModel = User.find({ login });
+async function registUser(body) {
+  const { login, password, firstName, lastName, email } = body;
+  let userModel = await User.findOne({ login });
   if (userModel) {
     return {
       data: { message: 'login is allready used' }
     };
   }
-  const hashPassword = security.hash(password);
+  const hashPassword = await security.hash(password);
   const userObj = {
     firstName,
     lastName,
     login,
+    email,
     password: hashPassword
   };
 
@@ -22,4 +25,6 @@ module.exports = async function registUser(login, password, firstName, lastName)
       user: userObj
     }
   };
-};
+}
+
+module.exports = { registUser };
