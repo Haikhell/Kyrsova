@@ -7,14 +7,14 @@ async function loginUser(body) {
   let userModel = await User.findOne({ login });
   if (!userModel) {
     return {
-      data: { message: 'login not found' }
+      data: { message: 'логін не знайдено' }
     };
   }
   const passwordEquals = await security.compare(password, userModel.password);
   if (!passwordEquals) {
     return {
       data: {
-        message: 'password or login not valid'
+        message: 'неправельний логін або пароль'
       }
     };
   }
@@ -22,9 +22,11 @@ async function loginUser(body) {
     login,
     firstName: userModel.firstName,
     lastName: userModel.lastName,
-    email: email
+    email: userModel.email,
+    tests: userModel.tests
   };
   return {
+    status: 200,
     data: {
       user: userObj
     }

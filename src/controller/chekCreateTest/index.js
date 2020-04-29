@@ -1,4 +1,5 @@
 const chek = require('./chek');
-const create = require('./create');
+const create = require('./createTopic');
+const createLastTest = require('./createTest');
 
-module.exports = { chek, create };
+module.exports = { chek, create, createLastTest };

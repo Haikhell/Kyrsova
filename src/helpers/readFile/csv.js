@@ -1,5 +1,8 @@
 const fs = require('fs');
 const csv = require('csv-parser');
+
+const config = '';
+
 async function readAndParseFileCSV(name) {
   return new Promise((resolve, reject) => {
     var masivTestObj = [];

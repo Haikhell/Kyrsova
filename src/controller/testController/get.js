@@ -1,19 +1,23 @@
 const saveToDb = require('./saveToDb');
 const Test = require('../../db/models/test');
 
-async function get(id) {
+async function getById(id) {
   const testModel = Test.findOne({ _id: id });
   if (testModel) {
     return {
+      status: 400,
       data: {
-        message: 'file not found'
+        message: 'Файл не знайдено'
       }
     };
   }
   let testObj = {
     fileName: testModel.fileName,
     studentClass: testModel.studentClass,
-    category: testModel.category
+    category: testModel.category,
+    format: testModel.format,
+    topic: testModel.topic,
+    originName: testModel.originName
   };
   return {
     data: {
@@ -21,4 +25,6 @@ async function get(id) {
     }
   };
 }
-module.exports = { get };
+
+async function getAll() {}
+module.exports = { getById, getAll };

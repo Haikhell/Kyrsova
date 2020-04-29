@@ -6,7 +6,8 @@ async function editUser(body) {
   let userModel = await User.findOne({ login });
   if (!userModel) {
     return {
-      data: { message: 'login not found' }
+      status: 200,
+      data: { message: 'Логін не знайдено' }
     };
   }
   userObj = {
@@ -17,8 +18,9 @@ async function editUser(body) {
     password: userModel.password,
     tests: body.tests
   };
-  await saveToDb(userObj);
+  let a = await User.updateOne({ login }, { $set: userObj });
   return {
+    status: 200,
     data: {
       user: userObj
     }

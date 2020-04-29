@@ -7,7 +7,7 @@ async function registUser(body) {
   let userModel = await User.findOne({ login });
   if (userModel) {
     return {
-      data: { message: 'login is allready used' }
+      data: { message: 'Логін уже існує' }
     };
   }
   const hashPassword = await security.hash(password);
@@ -16,11 +16,13 @@ async function registUser(body) {
     lastName,
     login,
     email,
-    password: hashPassword
+    password: hashPassword,
+    tests: []
   };
 
   await saveToDb(userObj);
   return {
+    status: 200,
     data: {
       user: userObj
     }

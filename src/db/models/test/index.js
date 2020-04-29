@@ -5,6 +5,8 @@ const testSchema = new Schema({
   fileName: String,
   category: String,
   studentClass: Number,
-  format: String
+  format: String,
+  topic: String,
+  originName: String
 });
 module.exports = mongoose.model('Tests', testSchema);

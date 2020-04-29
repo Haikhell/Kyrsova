@@ -5,7 +5,9 @@ module.exports = async function saveToDB(obj) {
     firstName: obj.firstName,
     lastName: obj.lastName,
     login: obj.login,
-    password: obj.password
+    password: obj.password,
+    email: obj.email,
+    tests: obj.tests
   });
   const save = await userToAdd.save();
   return save;
