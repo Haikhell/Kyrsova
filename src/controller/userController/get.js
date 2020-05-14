@@ -5,7 +5,7 @@ async function getUserById(id) {
   if (!userModel) {
     return {
       status: 400,
-      data: { message: 'Юзера не знай' }
+      data: { message: 'Юзера не знайдено' }
     };
   }
   return {
@@ -21,7 +21,7 @@ async function getUserByLogin(login) {
   if (!userModel) {
     return {
       status: 400,
-      data: { message: 'Юзера не знай' }
+      data: { message: 'Юзера не знайдено' }
     };
   }
   return {
@@ -36,7 +36,7 @@ async function getCategory(login) {
   if (!userModel) {
     return {
       status: 400,
-      data: { message: 'Юзера не знай' }
+      data: { message: 'Юзера не знайдено' }
     };
   }
 
@@ -47,4 +47,8 @@ async function getCategory(login) {
     }
   };
 }
-module.exports = { getUserById, getUserByLogin, getCategory };
+async function getAllTest(login) {
+  let userModel = await User.findOne({ login });
+  return userModel.readyTests;
+}
+module.exports = { getUserById, getUserByLogin, getCategory, getAllTest };

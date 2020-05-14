@@ -6,21 +6,36 @@ function shuffle(array) {
 }
 
 async function createTest(tests) {
+  console.log(tests);
   let test = [];
   for (let i = 0; i < tests.length; i++) {
+    console.log(tests[i]);
     let tempMas = [];
     let tempObj = {};
     tempObj.question = tests[i][0];
     for (let j = 3; j < Object.keys(tests[i]).length; j++) {
       tempMas.push(tests[i][j.toString()]);
     }
-    shuffle(tempMas);
+    //  await shuffle(tempMas);
 
     tempObj.answers = tempMas;
     test.push(tempObj);
   }
-  shuffle(test);
+  //await shuffle(test);
   return test;
 }
+async function test(test) {
+  let tempMasiv = [];
+  for (let i = 0; i < test.length; i++) {
+    let temp = {};
+    temp.question = test[i][0];
+    temp.answer = test[i][1];
+    temp.bal = test[i][2];
+    temp.answers = test[i].answers;
+    tempMasiv.push(temp);
+  }
+  console.log(tempMasiv);
+  return tempMasiv;
+}
 
-module.exports = { createTest };
+module.exports = { createTest, test };

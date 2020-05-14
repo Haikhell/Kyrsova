@@ -1,8 +1,22 @@
 const saveToDb = require('./saveToDb');
 const userController = require('../userController');
+const parserCsv = require('../../helpers/readFile/csv');
+const parserDoc = require('../../helpers/readFile/doc');
 
-async function createTest(body) {
-  const { fileName, studentClass, category, format, topic, originName, login, count } = body;
+async function loadToDbTest(body) {
+  console.log(body);
+
+  const { fileName, studentClass, category, format, topic, originName, login } = body;
+  let count;
+  console.log(fileName);
+  if (format == 'csv') {
+    let ms = await parserCsv.readAndParseFileCSV(fileName);
+    count = ms.length;
+    console.log(count);
+  } else {
+    let ms = await parserDoc.readDoc(fileName);
+    count = ms.length;
+  }
   let fileObj = {
     fileName,
     studentClass,
@@ -35,7 +49,7 @@ async function createTest(body) {
       });
     }
   }
-  console.log(masiv);
+  //console.log(masiv);
   if (masiv.length == 0) {
     masiv.push({
       category: category,
@@ -65,4 +79,4 @@ async function createTest(body) {
     }
   };
 }
-module.exports = { createTest };
+module.exports = { loadToDbTest };

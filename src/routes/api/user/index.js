@@ -17,6 +17,7 @@ router.post('/searchcategory', async (req, res) => {
   let test = await userController.search.searchByCategory(req.body);
 });
 router.post('/getcategory', async (req, res) => {
+  console.log(req.body);
   let test = await userController.get.getCategory(req.body.login);
   res.send(test);
 });
@@ -29,4 +30,5 @@ router.post('/edit', async (req, res) => {
   let user = await userController.edit.editUser(req.body);
   res.send(user);
 });
+
 module.exports = router;

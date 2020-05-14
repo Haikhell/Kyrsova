@@ -5,6 +5,8 @@ var upload = multer({ dest: 'uploads/' });
 const csv = require('../../../helpers/readFile').csvRead;
 const testCreateChekController = require('../../../controller').testCreateChekController;
 const testController = require('../../../controller').testController;
+const userController = require('../../../controller').userController;
+const readyTestController = require('../../../controller').readyTestController;
 
 const router = express.Router();
 
@@ -15,15 +17,65 @@ const router = express.Router();
 router.post('/upload', upload.single('tasks'), async function(req, res, next) {
   req.body.fileName = req.file.filename;
   req.body.originName = req.file.originalname;
-  let model = await testController.create.createTest(req.body);
+  let model = await testController.create.loadToDbTest(req.body);
   if (!model) {
     res.send('error');
   }
   res.send(model);
 });
 router.post('/createtest', async (req, res) => {
-  testCreateChekController.createLastTest.createLastTest(req.body.masiv);
+  let test = await testCreateChekController.createLastTest.createLastTest(
+    req.body.topic,
+    req.body.name,
+    req.body.login
+  );
+  res.send(test);
 });
+
+router.post('/getalltest', async (req, res) => {
+  let masiv = [];
+  let testId = await userController.get.getAllTest(req.body.login);
+  for (let i = 0; i < testId.length; i++) {
+    let parseTest = await readyTestController.get.getReadyTest(testId[i]);
+    masiv.push(parseTest);
+  }
+  res.send(masiv);
+});
+const send = require('../../../helpers/mailSend');
+router.post('/sendtest', async (req, res) => {
+  let masivUsers = req.body.users;
+  let testId = req.body.testId;
+  let usersId = await send.sendTest(masivUsers, testId);
+  result = {
+    data: {
+      testId: testId,
+      userId: usersId
+    }
+  };
+  res.send(result);
+});
+router.get('/gettest/:id', async (req, res) => {
+  let test = await readyTestController.get.getReadyTest(req.params.id);
+  let result = {
+    status: 200,
+    data: {
+      test: test
+    }
+  };
+  res.send(result);
+});
+
+router.post('/verifytest', async (req, res) => {
+  let bal = await testCreateChekController.verifyTest.verifyTest(req.body.test, req.body.id, req.body.name);
+  console.log(bal);
+
+  let result = {
+    status: 200,
+    data: { bal }
+  };
+  res.send(result);
+});
+
 // router.post('/edit', async (req, res) => {
 //   let test = await testController.edit.edit(req.body);
 //   res.send(test);

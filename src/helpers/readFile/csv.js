@@ -13,8 +13,13 @@ async function readAndParseFileCSV(name) {
       .on('data', (row) => {
         let textMasiv = row['0'].split('||');
         tempObj = {};
+        tempObj.answers = [];
         for (let i = 0; i < textMasiv.length; i++) {
-          tempObj[`${i}`] = textMasiv[i];
+          if (i > 2) {
+            tempObj.answers.push(textMasiv[i]);
+          } else {
+            tempObj[`${i}`] = textMasiv[i];
+          }
         }
         masivTestObj.push(tempObj);
       })

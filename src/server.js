@@ -1,6 +1,5 @@
 const http = require('http');
 
-const CONSTANTS = require('./const');
 const config = require('./config');
 const connect = require('./db');
 
