@@ -4,15 +4,11 @@ const parserCsv = require('../../helpers/readFile/csv');
 const parserDoc = require('../../helpers/readFile/doc');
 
 async function loadToDbTest(body) {
-  console.log(body);
-
   const { fileName, studentClass, category, format, topic, originName, login } = body;
   let count;
-  console.log(fileName);
   if (format == 'csv') {
     let ms = await parserCsv.readAndParseFileCSV(fileName);
     count = ms.length;
-    console.log(count);
   } else {
     let ms = await parserDoc.readDoc(fileName);
     count = ms.length;
@@ -49,7 +45,6 @@ async function loadToDbTest(body) {
       });
     }
   }
-  //console.log(masiv);
   if (masiv.length == 0) {
     masiv.push({
       category: category,

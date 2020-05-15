@@ -2,8 +2,10 @@ const fs = require('fs');
 const doc = require('docx-parser');
 
 async function readDoc(filename) {
+  let pathFile = `./uploads/${filename}`;
+
   return new Promise((resolve, reject) => {
-    doc.parseDocx(filename, function(data) {
+    doc.parseDocx(pathFile, function(data) {
       if (!data) {
         reject('cannot read file');
       }
@@ -41,7 +43,7 @@ async function parseDocx(filename) {
           variants.push(oneTask[index2]);
         }
       }
-      taskObject[answers] = variants;
+      taskObject.answers = variants;
       objectsToReturn.push(taskObject);
     }
     return objectsToReturn;

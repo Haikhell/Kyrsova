@@ -6,10 +6,8 @@ function shuffle(array) {
 }
 
 async function createTest(tests) {
-  console.log(tests);
   let test = [];
   for (let i = 0; i < tests.length; i++) {
-    console.log(tests[i]);
     let tempMas = [];
     let tempObj = {};
     tempObj.question = tests[i][0];
@@ -34,7 +32,6 @@ async function test(test) {
     temp.answers = test[i].answers;
     tempMasiv.push(temp);
   }
-  console.log(tempMasiv);
   return tempMasiv;
 }
 

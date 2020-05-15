@@ -24,7 +24,6 @@ async function sendTest(emails, id) {
       text: link
     });
   }
-  console.log(masiv);
   return masiv;
 }
 
