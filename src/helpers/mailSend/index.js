@@ -1,6 +1,6 @@
 const nodemailer = require('nodemailer');
 
-async function sendTest(emails, id) {
+async function sendTest(emails, id, adminId) {
   let masiv = [];
   let transporter = nodemailer.createTransport({
     host: 'smtp.gmail.com',
@@ -15,7 +15,7 @@ async function sendTest(emails, id) {
   for (let i = 0; i < emails.length; i++) {
     let idUser = makeid();
     masiv.push(idUser);
-    let link = `http://localhost:8080/test/${idUser}/${id}/userData`;
+    let link = `http://localhost:8080/test/${idUser}/${id}/${adminId}/userData`;
 
     await transporter.sendMail({
       from: 'qrcomerce1@gmail.com',

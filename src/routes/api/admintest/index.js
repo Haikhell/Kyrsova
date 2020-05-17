@@ -1,6 +1,7 @@
 const express = require('express');
 var multer = require('multer');
 var upload = multer({ dest: 'uploads/' });
+const User = require('../../../db/models/user');
 
 const csv = require('../../../helpers/readFile').csvRead;
 const testCreateChekController = require('../../../controller').testCreateChekController;
@@ -45,7 +46,9 @@ const send = require('../../../helpers/mailSend');
 router.post('/sendtest', async (req, res) => {
   let masivUsers = req.body.users;
   let testId = req.body.testId;
-  let usersId = await send.sendTest(masivUsers, testId);
+  let login = req.body.login;
+  let adminId = await User.findOne({ login });
+  let usersId = await send.sendTest(masivUsers, testId, adminId.id);
   result = {
     data: {
       testId: testId,
@@ -67,8 +70,7 @@ router.get('/gettest/:id', async (req, res) => {
 
 router.post('/verifytest', async (req, res) => {
   let bal = await testCreateChekController.verifyTest.verifyTest(req.body.test, req.body.id, req.body.name);
-  console.log(bal);
-
+  let complited = await userController.complitedTest.postComplited(req.body, bal);
   let result = {
     status: 200,
     data: { bal }

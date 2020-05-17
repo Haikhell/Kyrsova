@@ -22,6 +22,16 @@ router.post('/getcategory', async (req, res) => {
   res.send(test);
 });
 
+router.post('/complitedtest', async (req, res) => {
+  let user = await userController.complitedTest.postComplited(req.body);
+  res.send(user);
+});
+
+router.get('/complitedtest/:id', async (req, res) => {
+  let user = await userController.complitedTest.getComplited(req.params.id);
+  res.send(user);
+});
+
 router.post('/login', async (req, res) => {
   let user = await userController.login.loginUser(req.body);
   res.send(user);
