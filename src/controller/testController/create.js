@@ -11,7 +11,8 @@ async function loadToDbTest(body) {
     count = ms.length;
   } else {
     let ms = await parserDoc.readDoc(fileName);
-    count = ms.length;
+    let len = ms.split('$$$$').length - 1;
+    count = len;
   }
   let fileObj = {
     fileName,
