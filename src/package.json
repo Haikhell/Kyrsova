@@ -16,7 +16,7 @@
     "csv-parser": "^2.3.2",
     "docx-parser": "^0.2.1",
     "dotenv": "8.0.0",
-    "express": "4.17.0",
+    "express": "4.18.2",
     "express-rate-limit": "4.0.1",
     "helmet": "latest",
     "jwt-simple": "0.5.6",
